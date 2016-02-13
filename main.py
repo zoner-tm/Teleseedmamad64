@@ -34,10 +34,12 @@ def compile_link(message):
     input_file = csv.DictReader(open("languages.csv"))
 
     id = -1
+    compargs = ""
 
     for row in input_file:
         if row["name"].lower() == arguments[1].lower():
             id = row["id"]
+            compargs = row["compileargs"]
 
     if id is -1:
         bot.reply_to(message,  "Language is not supported")
@@ -49,9 +51,10 @@ def compile_link(message):
         return;
 
     args = {}
-    args["language"] = id
-    args["code"] = code
-    args["stdin"] = "#banmartijn"
+    args["LanguageChoiceWrapper"] = id #"Python"#id
+    args["Program"] = code
+    args["CompilerArgs"] = compargs
+
     try:
         r = requests.post(HOST, data = args,
                         timeout=10)
@@ -60,18 +63,18 @@ def compile_link(message):
         return
 
 
-
     output = r.json()
 
+
     response = "Output: \n"
-    if "errors" in output and output["errors"]:
+    if "Errors" in output and output["Errors"]:
         response += "An error occured: \n"
-        response += output["errors"]
+        response += output["Errors"]
         bot.reply_to(message, response)
         return
 
-    response += output["output"][0:200] + "\n etc. \n"
-    response += "Execution time: " + output["time"][:-2] + " seconds\n"
+    response +=  output["Result"]+ "\n"
+    response += "stats:\n " + output["Stats"] + "\n"
     response += "URL: https://pastebin.com/raw.php?i=" + arguments[0] + "\n"
     bot.reply_to(message, response)
 
