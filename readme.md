@@ -6,10 +6,11 @@ Telegram-bot-compiler is, as the name suggests, a telegram bot that compiles and
 Usage
 -----
 
-Clone the repository by executing the following command:
+Clone the repository by executing the following commands:
 
 ```
 git clone  https://github.com/flammified/telegram-compile-bot.git
+pip install -r requirements.txt
 ```
 
 
