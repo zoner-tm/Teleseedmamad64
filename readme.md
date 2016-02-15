@@ -19,3 +19,5 @@ Then put your telegram http token in file called token.txt and edit the host in 
 ```
 python main.py
 ```
+
+Otherwise, if you do not want to host it yourself, you can try it [here](https://telegram.me/compile_bot). This link will open using the Telegram client.
