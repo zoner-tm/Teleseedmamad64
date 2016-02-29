@@ -90,4 +90,7 @@ def print_languages(message):
     bot.reply_to(message,response)
 
 if __name__ == "__main__":
-    bot.polling()
+    try:
+        bot.polling(none_stop=True)
+    except ConnectionError:
+        pass
